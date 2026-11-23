@@ -7,7 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
 // Inject the DbContext child class.
 // The controller will use it by receiving it as a parameter in its constructor.
 builder.Services.AddDbContext<BowlingDbContext>(options =>
@@ -31,9 +30,7 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 // var hasher = new PasswordHasher<BowlingUser>();
