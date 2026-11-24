@@ -1,0 +1,113 @@
+using Microsoft.AspNetCore.Mvc;
+using ProjectDbStarter.Models;
+
+namespace ProjectDbStarter.Controllers
+{
+    public class AdminController : Controller
+    {
+        private readonly BowlingDbContext _db;
+
+        public AdminController(BowlingDbContext db)
+        {
+            _db = db;
+        }
+
+        // TODO: Lists teams with filters by divison, paid/unpaid
+        [HttpGet]
+        public IActionResult Index(string? division, bool? paid)
+        {
+            return View();
+        }
+
+        // TODO: Shows The TeamEditVm
+        [HttpGet]
+        public IActionResult CreateTeam()
+        {
+            return View();
+        }
+
+        // TODO: Add The TeamEditVm as a Team Obj to Db if meets requirements
+        [HttpPost]
+        public IActionResult CreateTeam(TeamEditViewModel vm)
+        {
+            return View();
+        }
+
+        // TODO: Get the Team from id and show it in the view
+        [HttpGet]
+        public IActionResult EditTeam(int id)
+        {
+            return View();
+        }
+
+        // TODO: Update the Team from The ViewModel in the db
+        [HttpPost]
+        public IActionResult EditTeam(TeamEditViewModel vm)
+        {
+            return View();
+        }
+
+        // TODO: Populates the delete page with view model populated with team data
+        [HttpGet]
+        public IActionResult DeleteTeam(int id)
+        {
+            return View();
+        }
+
+        // TODO: Deletes the team in the database on confirmation
+        [HttpPost, ActionName("DeleteTeam")]
+        public IActionResult DeleteTeamConfirm(int id)
+        {
+            return View();
+        }
+
+        // TODO: Shows all the players in a model
+        [HttpGet]
+        public IActionResult ManagePlayers(int teamId)
+        {
+            return View();
+        }
+
+        // TODO: Shows The PlayerVm
+        [HttpGet]
+        public IActionResult AddPlayer()
+        {
+            return View();
+        }
+
+        // TODO: Add The Player as a Player Obj to Db if meets requirements
+        [HttpPost]
+        public IActionResult AddPlayer(PlayerEditViewModel vm)
+        {
+            return View();
+        }
+
+        // TODO: Remove The Player from Db
+        [HttpPost]
+        public IActionResult RemovePlayer(int id)
+        {
+            return View();
+        }
+
+        // TODO: Change a teams status to paid or not paid
+        [HttpPost]
+        public IActionResult UpdatePaid(int id)
+        {
+            return View();
+        }
+
+        // TODO: Shows overall registration summary
+        [HttpGet]
+        public IActionResult Summary()
+        {
+            return View();
+        }
+
+        // TODO: Shows registration summary grouped by division
+        [HttpGet]
+        public IActionResult DivisionSummary()
+        {
+            return View();
+        }
+    }
+}
