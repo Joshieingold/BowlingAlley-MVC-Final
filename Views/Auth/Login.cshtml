@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "Login";
+}
+@model ProjectDbStarter.Models.LoginViewModel;
+
+<form method="post">
+    <div class="container">
+        <label for="username" class="row">Username</label>
+        <input asp-for="Username" id="username"class="row" type="text" />
+        <span class="text-danger row" asp-validation-for="Username"></span>
+    </div>
+    <div class="container">
+        <label for="password row">Password</label>
+        <input asp-for="Password" class="row" id="password" type="password" />
+        <span class="text-danger row" asp-validation-for="Password"></span>
+    </div>
+    <button type="submit" class="btn btn-primary" asp-action="Login">Login</button>
+</form>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }
