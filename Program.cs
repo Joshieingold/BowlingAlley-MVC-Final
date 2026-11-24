@@ -12,6 +12,20 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BowlingDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("BowlingDb"))
 );
+builder
+    .Services.AddAuthentication("app-cookie")
+    .AddCookie(
+        "app-cookie",
+        options =>
+        {
+            options.LoginPath = "/Auth/Login"; // triggered by [Authorize] when user is NOT logged in
+            options.AccessDeniedPath = "/Auth/Denied"; // triggered when we return Forbid()
+        }
+    );
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireClaim("IsAdmin", "true"));
+});
 
 var app = builder.Build();
 
