@@ -43,7 +43,7 @@ public class AdminTeamsController(BowlingDbContext db) : AdminController(db)
         // Shouldnt be null
         if (foundTeam == null)
         {
-            return View();
+            return NotFound($"Team with ID: {id} Not Found");
         }
         TeamViewModel tvo = ConvertToModel(foundTeam);
         return View(tvo);
@@ -53,6 +53,11 @@ public class AdminTeamsController(BowlingDbContext db) : AdminController(db)
     [HttpPost]
     public IActionResult EditTeam(TeamViewModel vm)
     {
+        // Needs to be valid to submit
+        if (!ModelState.IsValid)
+        {
+            return EditTeam(vm.TeamId);
+        }
         try
         {
             Team t = ConvertToDbObject(vm);
