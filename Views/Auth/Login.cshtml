@@ -3,6 +3,7 @@
 }
 @model ProjectDbStarter.Models.LoginViewModel;
 
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <form method="post">
     <div class="container">
         <label for="username" class="row">Username</label>
@@ -10,7 +11,7 @@
         <span class="text-danger row" asp-validation-for="Username"></span>
     </div>
     <div class="container">
-        <label for="password row">Password</label>
+        <label for="password" class="row">Password</label>
         <input asp-for="Password" class="row" id="password" type="password" />
         <span class="text-danger row" asp-validation-for="Password"></span>
     </div>

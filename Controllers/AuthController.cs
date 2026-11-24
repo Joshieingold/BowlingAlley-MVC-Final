@@ -1,61 +1,67 @@
-using System.Diagnostics;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectDbStarter.Models;
 
 namespace ProjectDbStarter.Controllers;
 
-public class AuthController : Controller
+// Old way triggers IDE0290, so this is how Im doing the Dependency Injection
+public class AuthController(BowlingDbContext db) : Controller
 {
-    private readonly BowlingDbContext _db;
-
-    public AuthController(BowlingDbContext db)
-    {
-        _db = db;
-    }
-
-    // TODO: Shows the logins page
+    // Shows the login page with a blank View Model
     [HttpGet]
     public IActionResult Login()
     {
-        LoginViewModel vm = new LoginViewModel();
-        return View(vm);
+        // Just pass a plain LoginViewModel
+        return View(new LoginViewModel());
     }
 
-    // TODO: posts the login form and verifies credentials to login
+    // Posts the login form and verifies credentials to login
     [HttpPost]
     public async Task<IActionResult> Login(LoginViewModel vm)
     {
-        BowlingUser? user = _db.Users.FirstOrDefault(u => u.UserName == vm.Username);
-        // Make sure theyre not null
+        // Find the user
+        BowlingUser? user = db.Users.FirstOrDefault(u => u.UserName == vm.Username);
+        // when the user is not found return
         if (user == null)
         {
+            ModelState.AddModelError("", "Incorrect Username or Password");
+            return View(vm);
+        }
+
+        // Make sure the password is correct
+        PasswordHasher<BowlingUser> passHasher = new();
+        if (
+            passHasher.VerifyHashedPassword(user, user.PasswordHash, vm.Password)
+            == PasswordVerificationResult.Failed
+        )
+        {
+            ModelState.AddModelError("", "Incorrect Username or Password");
             return View(vm);
         }
 
         // Claims
-        List<Claim> claims = new List<Claim>
-        {
+        // CS RECOMMENDS THIS NEW SYNTAX
+        List<Claim> claims =
+        [
             new Claim(ClaimTypes.Name, user.UserName),
             new Claim("IsAdmin", user.IsAdmin ? "true" : "false"),
-        };
+        ];
 
-        ClaimsIdentity ci = new ClaimsIdentity(
-            claims,
-            CookieAuthenticationDefaults.AuthenticationScheme
-        );
-        ClaimsPrincipal p = new ClaimsPrincipal(ci);
+        ClaimsIdentity ci = new(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        ClaimsPrincipal p = new(ci);
 
         await HttpContext.SignInAsync(p);
         return RedirectToAction("Index", "Home");
     }
 
-    // TODO: Logs the user out and redirects.
+    // User is logged out and cookie is removed
     [HttpPost]
-    public IActionResult Logout()
+    public async Task<IActionResult> Logout()
     {
+        await HttpContext.SignOutAsync();
         return RedirectToAction("Index", "Home");
     }
 }
