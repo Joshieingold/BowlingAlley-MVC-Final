@@ -88,7 +88,23 @@ namespace ProjectDbStarter.Controllers
         // TODO: Add The Player as a Player Obj to Db if meets requirements
         [HttpPost]
         [Authorize(Policy = "AdminOnly")]
-        public IActionResult AddPlayer(PlayerEditViewModel vm)
+        public IActionResult AddPlayer(PlayerViewModel vm)
+        {
+            return View();
+        }
+
+        // TODO: Shows the form to Edit the players data
+        [HttpGet]
+        [Authorize(Policy = "AdminOnly")]
+        public IActionResult EditPlayer()
+        {
+            return View();
+        }
+
+        // TODO: Update The Player as a Player Obj to Db if meets requirements
+        [HttpPost]
+        [Authorize(Policy = "AdminOnly")]
+        public IActionResult EditPlayer(PlayerViewModel vm)
         {
             return View();
         }

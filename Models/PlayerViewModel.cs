@@ -1,6 +1,6 @@
 namespace ProjectDbStarter.Models
 {
-    public class PlayerEditViewModel
+    public class PlayerViewModel
     {
         public int PlayerId { get; set; }
         public int TeamId { get; set; }
@@ -9,6 +9,6 @@ namespace ProjectDbStarter.Models
         public string Email { get; set; }
         public string Phone { get; set; }
 
-        public PlayerEditViewModel() { }
+        public PlayerViewModel() { }
     }
 }
