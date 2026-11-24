@@ -22,7 +22,10 @@ builder
             options.AccessDeniedPath = "/Auth/Denied"; // triggered when we return Forbid()
         }
     );
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireClaim("IsAdmin", "true"));
+});
 
 var app = builder.Build();
 
