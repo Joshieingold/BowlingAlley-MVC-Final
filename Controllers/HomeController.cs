@@ -12,9 +12,10 @@ public class TeamInfo
 
     public int TeamId { get; set; }
     public string TeamName { get; set; } = string.Empty;
-    public int Division { get; set; }
-    public bool RegPaid { get; set; }
-    public string? RegDate { get; set; }
+    public int DivisionId { get; set; }
+    public bool RegistrationPaid { get; set; }
+    public decimal RegistrationFee { get; set; }
+    public string? RegistrationDate { get; set; }
     public List<string> Players { get; set; } = new();
 }
 
@@ -31,45 +32,45 @@ public class HomeController : Controller
             {
                 TeamId = 36,
                 TeamName = "Lucky Laners",
-                Division = 2,
-                RegPaid = true,
-                RegDate = "2026-05-09",
+                DivisionId = 2,
+                RegistrationPaid = true,
+                RegistrationDate = "2026-05-09",
                 Players = ["Jamie Doman", "Russell Griswold", "Alex Vance", "Owen Wonne"]
             },
             new()
             {
                 TeamId = 37,
                 TeamName = "Women in STEM",
-                Division = 4,
-                RegPaid = false,
-                RegDate = null,
+                DivisionId = 4,
+                RegistrationPaid = false,
+                RegistrationDate = null,
                 Players = ["McLovin", "Brody Sailor", "Sam Altman", "John Deadlock"]
             },
             new()
             {
                 TeamId = 38,
                 TeamName = "Super Intelligence Team",
-                Division = 5,
-                RegPaid = false,
-                RegDate = null,
+                DivisionId = 5,
+                RegistrationPaid = false,
+                RegistrationDate = null,
                 Players = ["Abigail Callaghan", "Lex Luthor", "Connie Layes", "Wade Wilson"]
             },
             new()
             {
                 TeamId = 39,
                 TeamName = "Team Four Star",
-                Division = 1,
-                RegPaid = true,
-                RegDate = "2026-05-23",
+                DivisionId = 1,
+                RegistrationPaid = true,
+                RegistrationDate = "2026-05-23",
                 Players = ["Joe Mama", "Jim Lahey", "Rita Martin", "Emily French"]
             },
             new()
             {
                 TeamId = 40,
                 TeamName = "Fireballs",
-                Division = 3,
-                RegPaid = true,
-                RegDate = "2026-05-08",
+                DivisionId = 3,
+                RegistrationPaid = true,
+                RegistrationDate = "2026-05-08",
                 Players = ["Sophie Chatterton", "Kailey Roberts", "Rory Hughes", "Steve Harrington"]
             }
         };
