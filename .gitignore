@@ -3,3 +3,4 @@ obj/
 AppData/*.db
 AppData/*.db-*
 .vs/
+/AppData/bowling.db
