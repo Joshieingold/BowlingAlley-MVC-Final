@@ -1,1 +1,31 @@
-<h2>Edit Team</h2>
+@model ProjectDbStarter.Models.TeamViewModel
+<section>
+    <form method="post">
+        <div>
+            <label for="teamName">Team Name</label>
+            <input id="teamName" asp-for="TeamName" />
+        </div>
+        <div>
+            <label for="teamDivision">Team Name</label>
+            <select asp-for="TeamDivision" id="teamDivision">
+                @foreach (var d in Enum.GetValues<Division>())
+                {
+                    <option value="@d">@d</option>
+                }
+            </select>
+        </div>
+        <label for="radioBox">Registration Paid</label>
+        <div id="radioBox">
+            <label>No</label>
+            <input type="radio" value="false" name="paid" id="paid_false" asp-for="RegistrationPaid" />
+            <label>Yes</label>
+            <input type="radio" value="true" name="paid" id="paid_true" asp-for="RegistrationPaid" />
+        </div>
+        <div id="paymentDateSection">
+            <label for="payDate">Payment Date</label>
+            <input type="date" id="payDate" asp-for="PaymentDate" />
+        </div>
+        <button>Update</button>
+        <button>Cancel</button>
+    </form>
+</section>
