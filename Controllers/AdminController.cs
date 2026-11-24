@@ -21,6 +21,10 @@ namespace ProjectDbStarter.Controllers
             return View();
         }
 
+        ///////////
+        // TEAMS //
+        ///////////
+
         // TODO: Shows The TeamEditVm
         [HttpGet]
         [Authorize(Policy = "AdminOnly")]
@@ -69,6 +73,10 @@ namespace ProjectDbStarter.Controllers
             return View();
         }
 
+        ////////////
+        // ROSTER //
+        ////////////
+
         // TODO: Shows all the players in a model
         [HttpGet]
         [Authorize(Policy = "AdminOnly")]
@@ -116,6 +124,10 @@ namespace ProjectDbStarter.Controllers
         {
             return View();
         }
+
+        ////////////////
+        // OPERATIONS //
+        ////////////////
 
         // TODO: Change a teams status to paid or not paid
         [HttpPost]
