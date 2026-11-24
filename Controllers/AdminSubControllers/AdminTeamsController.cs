@@ -12,28 +12,58 @@ public class AdminTeamsController(BowlingDbContext db) : AdminController(db)
     [HttpGet]
     public IActionResult CreateTeam()
     {
-        return View();
+        // Simple life :)
+        return View(new TeamViewModel());
     }
 
     // TODO: Add The TeamEditVm as a Team Obj to Db if meets requirements
     [HttpPost]
     public IActionResult CreateTeam(TeamViewModel vm)
     {
-        return View();
+        try
+        {
+            Team newTeam = ConvertToDbObject(vm);
+            db.Teams.Add(newTeam);
+            db.SaveChanges();
+            // This should go to the place where everything is listed.
+            return View();
+        }
+        catch (Exception ex)
+        {
+            // This should be some error location
+            return View();
+        }
     }
 
-    // TODO: Get the Team from id and show it in the view
+    // Get the Team from id and show it in the view
     [HttpGet]
     public IActionResult EditTeam(int id)
     {
-        return View();
+        Team? foundTeam = db.Teams.FirstOrDefault(t => t.TeamId == id);
+        // Shouldnt be null
+        if (foundTeam == null)
+        {
+            return View();
+        }
+        TeamViewModel tvo = ConvertToModel(foundTeam);
+        return View(tvo);
     }
 
-    // TODO: Update the Team from The ViewModel in the db
+    // Update the Team from The ViewModel in the db
     [HttpPost]
     public IActionResult EditTeam(TeamViewModel vm)
     {
-        return View();
+        try
+        {
+            Team t = ConvertToDbObject(vm);
+            db.Teams.Update(t);
+            db.SaveChanges();
+            return View();
+        }
+        catch (Exception ex)
+        {
+            return View();
+        }
     }
 
     // TODO: Populates the delete page with view model populated with team data
@@ -48,5 +78,41 @@ public class AdminTeamsController(BowlingDbContext db) : AdminController(db)
     public IActionResult DeleteTeamConfirm(int id)
     {
         return View();
+    }
+
+    ////////////////////////
+    // Conversion Helpers //
+    ////////////////////////
+
+    private TeamViewModel ConvertToModel(Team t)
+    {
+        TeamViewModel model = new()
+        {
+            TeamName = t.TeamName,
+            TeamDivision = t.TeamDivision,
+            RegistrationPaid = t.RegistrationPaid,
+        };
+        // Doesnt get set unless they have paid
+        if (model.RegistrationPaid)
+        {
+            model.PaymentDate = t.PaymentDate;
+        }
+        return model;
+    }
+
+    private Team ConvertToDbObject(TeamViewModel tvm)
+    {
+        Team model = new()
+        {
+            TeamName = tvm.TeamName,
+            TeamDivision = tvm.TeamDivision,
+            RegistrationPaid = tvm.RegistrationPaid,
+        };
+        // Doesnt get set unless they have paid
+        if (model.RegistrationPaid)
+        {
+            model.PaymentDate = tvm.PaymentDate;
+        }
+        return model;
     }
 }
