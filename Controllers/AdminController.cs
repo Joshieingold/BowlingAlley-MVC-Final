@@ -32,7 +32,7 @@ namespace ProjectDbStarter.Controllers
         // TODO: Add The TeamEditVm as a Team Obj to Db if meets requirements
         [HttpPost]
         [Authorize(Policy = "AdminOnly")]
-        public IActionResult CreateTeam(TeamEditViewModel vm)
+        public IActionResult CreateTeam(TeamViewModel vm)
         {
             return View();
         }
@@ -48,7 +48,7 @@ namespace ProjectDbStarter.Controllers
         // TODO: Update the Team from The ViewModel in the db
         [HttpPost]
         [Authorize(Policy = "AdminOnly")]
-        public IActionResult EditTeam(TeamEditViewModel vm)
+        public IActionResult EditTeam(TeamViewModel vm)
         {
             return View();
         }
