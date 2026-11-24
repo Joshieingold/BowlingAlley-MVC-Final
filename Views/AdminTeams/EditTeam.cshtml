@@ -1,10 +1,12 @@
 @model ProjectDbStarter.Models.TeamViewModel
 <section>
     <form method="post">
+        <input type="hidden" asp-for="TeamId" />
         <div>
             <label for="teamName">Team Name</label>
             <input id="teamName" asp-for="TeamName" />
         </div>
+        <span class="text-danger row" asp-validation-for="TeamName"></span>
         <div>
             <label for="teamDivision">Team Name</label>
             <select asp-for="TeamDivision" id="teamDivision">
@@ -14,6 +16,7 @@
                 }
             </select>
         </div>
+        <span class="text-danger row" asp-validation-for="TeamDivision"></span>
         <label for="radioBox">Registration Paid</label>
         <div id="radioBox">
             <label>No</label>
@@ -21,11 +24,15 @@
             <label>Yes</label>
             <input type="radio" value="true" name="paid" id="paid_true" asp-for="RegistrationPaid" />
         </div>
+        <span class="text-danger row" asp-validation-for="RegistrationPaid"></span>
         <div id="paymentDateSection">
             <label for="payDate">Payment Date</label>
             <input type="date" id="payDate" asp-for="PaymentDate" />
         </div>
-        <button>Update</button>
-        <button>Cancel</button>
+        <span class="text-danger row" asp-validation-for="PaymentDate"></span>
+        <div>
+            <button type="submit" asp-action="EditTeam">Update</button>
+            <button>Cancel</button>
+        </div>
     </form>
 </section>

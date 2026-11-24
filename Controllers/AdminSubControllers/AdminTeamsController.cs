@@ -88,6 +88,7 @@ public class AdminTeamsController(BowlingDbContext db) : AdminController(db)
     {
         TeamViewModel model = new()
         {
+            TeamId = t.TeamId,
             TeamName = t.TeamName,
             TeamDivision = t.TeamDivision,
             RegistrationPaid = t.RegistrationPaid,
@@ -104,6 +105,7 @@ public class AdminTeamsController(BowlingDbContext db) : AdminController(db)
     {
         Team model = new()
         {
+            TeamId = tvm.TeamId,
             TeamName = tvm.TeamName,
             TeamDivision = tvm.TeamDivision,
             RegistrationPaid = tvm.RegistrationPaid,
