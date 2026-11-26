@@ -1,25 +1,21 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+ViewData["Title"] = "Home Page";
 }
 
-<br /><br /><br /><br />
+<div class="container-fluid">
+    <h1 class="text-center mt-5">Saint John Bowling Association Tournament</h1>
+    <div class="m-4 d-flex justify-content-center align-items-center flex-column">
+        <span class="text-center mb-4">
+            <p class="d-inline">Welcome to the Saint John Bowling Association Tournament registration portal. Teams register with four
+            players and </p>
+            <p class="text-decoration-underline d-inline">must pay a fee to be fully registered.</p>
+        </span>
+        <a asp-controller="Team" asp-action="Index" class="btn btn-primary me-2">View Teams</a>
+    </div>
 
-<center>
-    <div class="mb-4">
-        <h1>Saint John Bowling Association Tournament</h1>
-        <p>Welcome to the Saint John Bowling Association Tournament registration portal. Teams register with four
-            players, <u>and must pay a fee to be
-            fully registered.</u></p>
-    
-            <br /><br />
-    
-            <p><a asp-controller="Team" asp-action="Index" class="btn btn-primary me-2">View Teams</a></p>
-        </div>
+    <div class="mb-5 container d-flex flex-column justify-content-center align-items-center">
+        <p class="fw-bold">Group 8</p>
+        <p>Erika, Josh, Sarah</p>
+    </div>
+</div>
 
-        <br /><br /><br /><br /><br /><br />
-
-        <div class="mb-5">
-            <p><strong>Group 8</strong></p>
-            <p>Josh, Sarah, Erika</p>
-        </div>
-    </center>
