@@ -1,7 +1,5 @@
 bin/
 obj/
-AppData/*.db
-AppData/*.db-*
 .vs/
 /obj/project.assets.json
 /obj/project.nuget.cache
