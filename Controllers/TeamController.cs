@@ -3,20 +3,13 @@ using ProjectDbStarter.Models;
 
 namespace ProjectDbStarter.Controllers
 {
-    public class TeamController : Controller
+    public class TeamController(BowlingDbContext db) : Controller
     {
-        private readonly BowlingDbContext _db;
-
-        public TeamController(BowlingDbContext db)
-        {
-            _db = db;
-        }
-
         [HttpGet]
         public IActionResult Index()
         {
             // Order for predictable display
-            var teams = _db.Teams.ToList();
+            var teams = db.Teams.ToList();
 
             return View(teams);
         }
